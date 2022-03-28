@@ -42,22 +42,32 @@ class SuperHeroes:
 if __name__ == '__main__':
 
     def show_most_intelligence_hero(superheroes_list):
-        max_intelligence = 0
-        most_intelligence_hero = ''
+        most_intelligence_heroes = []
+        intelligence_values = []
+        for hero_int_value in superheroes_list:
+            intelligence_values.append(int(hero_int_value.stats['intelligence']))
+        max_intelligence_value = max(intelligence_values)
         for hero in superheroes_list:
-            if max_intelligence < int(hero.stats['intelligence']):
-                max_intelligence = int(hero.stats['intelligence'])
-                most_intelligence_hero = hero.hero_name
-        print(f'\nСамый умный супергерой -- {most_intelligence_hero}, его интеллект равен {max_intelligence}\n')
+            if hero.stats['intelligence'] == str(max_intelligence_value):
+                most_intelligence_heroes.append(hero.hero_name)
+        if len(most_intelligence_heroes) > 1:
+            print(f'Самые умные супергерои: {", ".join(most_intelligence_heroes)}')
+            print(f'Их уровень интеллекта равен {max_intelligence_value}')
+        else:
+            print(f'Самый умный супергерой: {"".join(most_intelligence_heroes)}')
+            print(f'Его уровень интеллекта равен {max_intelligence_value}')
+
+    def show_all_heroes(superheroes_list):
+        for hero in superheroes_list:
+            print(hero)
 
 
     superhero_01 = SuperHeroes('Hulk')
     superhero_02 = SuperHeroes('Captain America')
     superhero_03 = SuperHeroes('Thanos')
+    superhero_04 = SuperHeroes('Professor X')
+    superhero_05 = SuperHeroes('Iron Man')
 
-    # Общая информация об имеющихся супергероях:
-    print(superhero_01)
-    print(superhero_02)
-    print(superhero_03)
+    show_all_heroes(SuperHeroes.superheroes_list)
 
     show_most_intelligence_hero(SuperHeroes.superheroes_list)
